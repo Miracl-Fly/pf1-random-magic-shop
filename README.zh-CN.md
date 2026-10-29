@@ -18,6 +18,9 @@
 - **药水合法性检查**：射程为 `personal` 或目标为 `self` 的法术不会出现在药水里。
 - **规则书白名单**：可以限制哪些 PF1 规则书（PZO 代码）的法术能进池子。
 - **Item Piles 集成**：生成完直接把店铺变成商人，能买能卖。
+- **每家店一张肖像**：武器铺用弯刀、护甲铺用战盾、药剂铺用蓝药水……一眼能从 Actor 列表里认出是哪家店。
+- **改名的文件夹不会被碰**：把 `<定居点> - 商店` 改成 `沙尖镇`，这批店就归你了——生成器不会打开它、
+  不会清空它的库存、也不会把里面的 Actor 搬走。
 
 ## 依赖
 
@@ -44,7 +47,7 @@
 
 ### 手动装
 
-到 [最新发布](../../releases/latest) 下载 `pf1-random-magic-shop-1.1.0.zip`，解压到 `Data/modules/`，确认路径是 `Data/modules/pf1-random-magic-shop/module.json`。
+到 [最新发布](../../releases/latest) 下载 `pf1-random-magic-shop-1.2.0.zip`，解压到 `Data/modules/`，确认路径是 `Data/modules/pf1-random-magic-shop/module.json`。
 
 ### 装完之后
 
@@ -57,6 +60,12 @@
 3. 模块会在名为 `<定居点> - 商店` 的文件夹里，为每种店铺建一个 Actor，掷出物品塞进去，并在聊天记录里发一条汇总。
 
 同一个定居点重复生成会**清空并重掷**已有店铺的内容，不会建重复的 Actor。
+
+### 把一批店「固化」下来
+
+文件夹名就是锚点。把 `小城镇 (Small town) - 商店` 改名成 `沙尖镇`，这批店就永久归你了——
+生成器**只在定居点文件夹里**找店铺，所以再生成多少次都不会碰改名的那批，只会在原档位下新建一套。
+想继续更新沙尖镇那批，把文件夹名改回原来的定居点名就行。
 
 ### Item Piles 商店
 
@@ -123,6 +132,7 @@ Item Piles 桥接有一份零依赖测试，直接用 Node 跑：
 
 ```bash
 node test/item-piles-bridge.test.mjs
+node test/shop-logic.test.mjs
 ```
 
 它 stub 掉 Foundry 的全局对象，验证商人 flag 写得对——以及**Item Piles 没启用时一个字节都不写**。

@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] — 2026-10-29
+
+### Added
+
+- **A portrait for every shop.** Each generated shop actor now gets its own PF1
+  item icon instead of the generic `mystery-man` placeholder:
+  weapon smith → broken back seax, armoury → dwarven war shield, potion shop →
+  grand blue potion, scroll shop → druid scroll, wand stall → star wand,
+  wonderous dealer → blue collar, general store → coin badge.
+- **Renamed folders are left alone.** Actor lookup is now scoped to the target
+  folder, so a folder the GM renamed (e.g. `小城镇 (Small town) - 商店` →
+  `沙尖镇`) is never touched: the next generation run creates a fresh set under
+  the original settlement folder and leaves the renamed shops — contents,
+  portraits and all — intact.
+- `scripts/shop-logic.js` — pure helper module (`findShopActorInFolder`,
+  `isDefaultPortrait`, `pickPortraitUpdate`) with no Foundry dependency, so the
+  folder-scoping rules can be unit tested.
+- `test/shop-logic.test.mjs` — 13 assertions, including a regression scenario
+  for the renamed-folder case.
+
+### Changed
+
+- Existing shops whose portrait is still the default placeholder are upgraded to
+  the new per-shop icon on the next run. Shops whose portrait was set manually
+  are **not** overwritten.
+- Shops found in a folder other than the generated one are no longer moved into
+  it. Previously the generator would relocate a same-named actor from any folder,
+  which looked like the old shop had been deleted.
+
+### Fixed
+
+- Re-running the generator no longer strips the inventory of shops that live in
+  a renamed folder.
+
 ## [1.1.0] — 2026-10-29
 
 ### Added
@@ -63,5 +97,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+[1.2.0]: https://github.com/YOUR_GITHUB_USER/pf1-random-magic-shop/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/YOUR_GITHUB_USER/pf1-random-magic-shop/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/YOUR_GITHUB_USER/pf1-random-magic-shop/releases/tag/v1.0.0

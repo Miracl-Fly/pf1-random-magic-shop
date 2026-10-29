@@ -25,6 +25,7 @@ pf1-random-magic-shop/
 │   ├── shop-app.js
 │   ├── shop-generator.js
 │   ├── settings.js
+│   ├── shop-logic.js          # pure helpers, unit tested
 │   └── item-piles-bridge.js
 ├── styles/
 │   └── shop-app.css
@@ -32,7 +33,8 @@ pf1-random-magic-shop/
 │   ├── shop-app.hbs
 │   └── sources-config.hbs
 ├── test/
-│   └── item-piles-bridge.test.mjs
+│   ├── item-piles-bridge.test.mjs
+│   └── shop-logic.test.mjs
 └── docs/
     ├── PUBLISHING.md        # this file
     ├── release-notes-v1.1.0.md

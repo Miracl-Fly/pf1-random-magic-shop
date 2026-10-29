@@ -18,6 +18,10 @@ Optionally turns every generated shop into a fully functional **[Item Piles](htt
 - **Potion legality check** — spells with a `personal` range or `self` target are skipped when rolling potions.
 - **Source book whitelist** — restrict which PF1 source books (PZO codes) may contribute spells.
 - **Item Piles integration** — one click turns a generated shop into a merchant that buys and sells.
+- **Per-shop portraits** — every shop type gets its own PF1 item icon (seax for the weapon smith,
+  shield for the armoury, a blue potion for the apothecary…), so the actor list is readable at a glance.
+- **Renamed folders are safe** — rename `<settlement> - Shops` to something like *Sandspire* and that
+  batch becomes yours: the generator never opens it, never clears its stock and never moves its actors.
 
 ## Requirements
 
@@ -44,7 +48,7 @@ Optionally turns every generated shop into a fully functional **[Item Piles](htt
 
 ### Manual
 
-Download `pf1-random-magic-shop-1.1.0.zip` from the [latest release](../../releases/latest), extract it into your `Data/modules/` folder, and make sure the result is `Data/modules/pf1-random-magic-shop/module.json`.
+Download `pf1-random-magic-shop-1.2.0.zip` from the [latest release](../../releases/latest), extract it into your `Data/modules/` folder, and make sure the result is `Data/modules/pf1-random-magic-shop/module.json`.
 
 ### After installing
 
@@ -57,6 +61,13 @@ Enable the module in **Settings → Manage Modules**, then reload the world (`F5
 3. The module creates one actor per shop type inside a folder named `<settlement> - Shops`, fills it with rolled items, and posts a summary to the chat log.
 
 Re-running the generator on the same settlement **clears and re-rolls** the contents of the existing shop actors instead of creating duplicates.
+
+### Keeping a batch
+
+The folder name is the anchor. Rename `小城镇 (Small town) - 商店` to `沙尖镇` and that set is permanently
+yours — the generator looks for shops **inside the settlement folder only**, so re-running the generator
+never touches the renamed batch. The next run simply creates a fresh folder and a fresh set of shops.
+To start updating the renamed batch again, rename the folder back to the original settlement name.
 
 ### Item Piles merchants
 
@@ -123,6 +134,7 @@ The Item Piles bridge has a dependency-free test suite that runs on plain Node:
 
 ```bash
 node test/item-piles-bridge.test.mjs
+node test/shop-logic.test.mjs
 ```
 
 It stubs the Foundry globals and asserts that merchant flags are written correctly — and, importantly, that **nothing is written when Item Piles is inactive**.

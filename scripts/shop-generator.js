@@ -1,5 +1,6 @@
 import { SETTLEMENTS } from "./shop-app.js";
 import { convertShopToItemPile, isItemPilesAvailable, placeShopToken } from "./item-piles-bridge.js";
+import { findShopActorInFolder, pickPortraitUpdate } from "./shop-logic.js";
 
 // ==================== 表定义 ====================
 
@@ -167,13 +168,13 @@ const FALLBACK_PACKS = [
 ];
 
 const SHOP_TYPES = [
-  { key: "general",  name: "综合商店" },
-  { key: "weapon",   name: "武器铺" },
-  { key: "armor",    name: "护甲铺" },
-  { key: "potion",   name: "药剂铺" },
-  { key: "scroll",   name: "卷轴铺" },
-  { key: "wand",     name: "魔杖铺" },
-  { key: "wondrous", name: "奇物铺" },
+  { key: "general",  name: "综合商店", img: "systems/pf1/icons/items/inventory/badge-coin.jpg" },
+  { key: "weapon",   name: "武器铺",   img: "systems/pf1/icons/items/weapons/broken-back-seax.png" },
+  { key: "armor",    name: "护甲铺",   img: "systems/pf1/icons/items/weapons/dwarven-war-shield.png" },
+  { key: "potion",   name: "药剂铺",   img: "systems/pf1/icons/items/potions/grand-blue.jpg" },
+  { key: "scroll",   name: "卷轴铺",   img: "systems/pf1/icons/items/inventory/scroll-druid.jpg" },
+  { key: "wand",     name: "魔杖铺",   img: "systems/pf1/icons/items/inventory/wand-star.jpg" },
+  { key: "wondrous", name: "奇物铺",   img: "systems/pf1/icons/items/inventory/collar-blue.jpg" },
 ];
 
 // ==================== 工具函数 ====================
@@ -475,13 +476,24 @@ export async function generateShops(settlementChoice, onProgress) {
 
   onLog("正在创建店铺 Actor...");
 
+  // ★ 只在目标文件夹里找同名店铺。
+  //   以前用 game.actors.getName() 全局找：玩家把「小城镇 (Small town) - 商店」改名成
+  //   「沙尖镇」之后，再生成时会隔着文件夹把沙尖镇里的店抢过来、清空重掷——
+  //   看起来就像旧商店被删了。现在别的文件夹里的 Actor 一律不碰，找不到就新建。
   const shopActors = {};
   for (const shop of SHOP_TYPES) {
-    let actor = game.actors.getName(shop.name);
+    let actor = findShopActorInFolder(game.actors.contents, folder.id, shop.name);
     if (!actor) {
-      actor = await Actor.create({ name: shop.name, type: "npc", img: "icons/svg/mystery-man.svg", folder: folder.id });
-    } else if (actor.folder?.id !== folder.id) {
-      await actor.update({ folder: folder.id });
+      actor = await Actor.create({
+        name: shop.name,
+        type: "npc",
+        img: shop.img,
+        folder: folder.id,
+      });
+    } else {
+      // 老店铺还挂着 mystery-man 占位图才补肖像；玩家手动换过的不覆盖
+      const portrait = pickPortraitUpdate(actor, shop.img);
+      if (portrait) await actor.update({ img: portrait });
     }
     shopActors[shop.key] = actor;
   }
