@@ -1,0 +1,24 @@
+<div class="pf1-rms-sources-config">
+  <p>勾选允许出现在随机商店里的规则书来源：</p>
+
+  <div class="sources-toolbar">
+    <button type="button" data-action="selectAll">全选</button>
+    <button type="button" data-action="clearAll">清空</button>
+  </div>
+
+  <div class="sources-list">
+    {{#each sources}}
+      <label class="source-item">
+        <input type="checkbox" value="{{this.code}}" {{#if this.checked}}checked{{/if}}>
+        <span class="source-name">{{this.name}}</span>
+        <span class="source-code">({{this.code}})</span>
+      </label>
+    {{/each}}
+  </div>
+
+  <div class="form-group">
+    <button type="button" data-action="save">
+      <i class="fas fa-save"></i> 保存
+    </button>
+  </div>
+</div>

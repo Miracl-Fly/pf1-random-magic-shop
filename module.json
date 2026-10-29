@@ -1,0 +1,61 @@
+{
+  "id": "pf1-random-magic-shop",
+  "title": "Random Magic Shop",
+  "description": "<p>按 PF1 规则随机生成魔法商店。</p><p>v1.1.0：生成后可直接接入 <strong>item-piles</strong> —— 每个店铺 Actor 会变成 item-piles 商人（卖货 / 有限库存 / 商人钱无限），聊天记录里点「🛒 打开商店」即可交易。</p>",
+  "version": "1.1.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "styles": [
+    {
+      "src": "styles/shop-app.css"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "pf1",
+        "type": "system",
+        "compatibility": {
+          "minimum": "11"
+        }
+      }
+    ],
+    "requires": [
+      {
+        "id": "pf-content",
+        "type": "module",
+        "compatibility": {}
+      }
+    ],
+    "recommends": [
+      {
+        "id": "item-piles",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
+        "id": "item-piles-pf1e",
+        "type": "module",
+        "compatibility": {}
+      }
+    ]
+  },
+  "authors": [
+    {
+      "name": "Miracl_Fly",
+      "flags": {}
+    }
+  ],
+  "flags": {},
+  "url": "https://github.com/YOUR_GITHUB_USER/pf1-random-magic-shop",
+  "manifest": "https://github.com/YOUR_GITHUB_USER/pf1-random-magic-shop/releases/latest/download/module.json",
+  "download": "https://github.com/YOUR_GITHUB_USER/pf1-random-magic-shop/releases/download/1.1.0/pf1-random-magic-shop-1.1.0.zip",
+  "readme": "https://github.com/YOUR_GITHUB_USER/pf1-random-magic-shop/blob/main/README.md",
+  "bugs": "https://github.com/YOUR_GITHUB_USER/pf1-random-magic-shop/issues",
+  "license": "MIT"
+}

@@ -1,0 +1,18 @@
+<div class="random-magic-shop-form">
+  <div class="form-group">
+    <label for="settlement-select">定居点规模：</label>
+    <select id="settlement-select" name="settlement">
+      {{#each settlements}}
+        <option value="{{this}}" {{#if (eq this ../selected)}}selected{{/if}}>{{this}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <button type="button" data-action="generate">
+      <i class="fas fa-dice-d20"></i> 生成商店
+    </button>
+  </div>
+
+  <div id="progress" class="progress-text"></div>
+</div>

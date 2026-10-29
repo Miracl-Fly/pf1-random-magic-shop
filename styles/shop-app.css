@@ -1,0 +1,65 @@
+.random-magic-shop-form .form-group {
+  margin-bottom: 12px;
+}
+.random-magic-shop-form label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+.random-magic-shop-form select {
+  width: 100%;
+  padding: 4px;
+}
+.random-magic-shop-form button {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.random-magic-shop-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.progress-text {
+  margin-top: 10px;
+  text-align: center;
+  color: #7a5c2e;
+  font-style: italic;
+  min-height: 20px;
+}
+.pf1-rms-sources-config .sources-toolbar {
+  margin-bottom: 8px;
+}
+.pf1-rms-sources-config .sources-toolbar button {
+  margin-right: 6px;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+.pf1-rms-sources-config .sources-list {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #7a5c2e;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 12px;
+}
+.pf1-rms-sources-config .source-item {
+  display: block;
+  padding: 4px 0;
+  cursor: pointer;
+}
+.pf1-rms-sources-config .source-item:hover {
+  background: rgba(122, 92, 46, 0.1);
+}
+.pf1-rms-sources-config .source-name {
+  font-weight: bold;
+  margin-left: 6px;
+}
+.pf1-rms-sources-config .source-code {
+  color: #888;
+  font-size: 0.9em;
+  margin-left: 6px;
+}
+.pf1-rms-sources-config .form-group {
+  text-align: right;
+}
